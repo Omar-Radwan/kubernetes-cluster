@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-names
+  namespace: default
+data:
+  backend_service_name: "backend-svc"
+  backend_service_port: "80"
+
+  frontend_service_name: "frontend-svc"
+  frontend_service_port: "80"
+
+  mongo_service_name: "mongo-svc"
+  mongo_service_port: "80"
+
+  redis_service_name: "redis-svc"
+  redis_service_port: "80"
+
+  backend_ingress_url: "simple-backend.io"
+  backend_ingress_port: "80"
+
+  frontend_ingress_url: "simple-frontend.io"
+  frontend_ingress_port: "80"

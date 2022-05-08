@@ -1,0 +1,2 @@
+const { REACT_APP_API_URL, REACT_APP_API_PORT } = process.env;
+export { REACT_APP_API_URL, REACT_APP_API_PORT }

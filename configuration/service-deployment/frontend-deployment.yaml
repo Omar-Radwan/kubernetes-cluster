@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: frontend-dep
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            component: frontend
+    template:
+        metadata:
+            labels:
+                component: frontend
+        spec:
+            containers:
+                - name: frontend
+                  image: localhost:5000/simple-react-frontend
+                  ports:
+                      - containerPort: 3000
+                  env:
+                      - name: REACT_APP_API_URL
+                        valueFrom:
+                            configMapKeyRef:
+                                name: service-names
+                                key: backend_ingress_url
+
+                      - name: REACT_APP_API_PORT
+                        valueFrom:
+                            configMapKeyRef:
+                                name: service-names
+                                key: backend_ingress_port

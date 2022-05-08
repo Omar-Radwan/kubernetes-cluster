@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: backend-dep
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            component: api
+    template:
+        metadata:
+            labels:
+                component: api
+        spec:
+            containers:
+                -   name: api
+                    image: localhost:5000/simple-go-backend
+                    ports:
+                        -   containerPort: 8000
+                    env:
+                        -   name: MONGO_SERVICE_NAME
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: service-names
+                                    key: mongo_service_name
+
+                        -   name: MONGO_SERVICE_PORT
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: service-names
+                                    key: mongo_service_port
+
+                        -   name: REDIS_SERVICE_NAME
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: service-names
+                                    key: redis_service_name
+
+                        -   name: REDIS_SERVICE_PORT
+                            valueFrom:
+                                configMapKeyRef:
+                                    name: service-names
+                                    key: redis_service_port
+
+
